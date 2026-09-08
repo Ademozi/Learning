@@ -16,6 +16,8 @@ io.on("connection", (socket) => {
 
     console.log("A user connected!");
 
+    socket.emit("message", "Hello from the server!");
+
     // Listen for an event called "message"
     // so everytime socket.emit("message") run, this function run
     socket.on("message", (message) => {

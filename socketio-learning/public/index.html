@@ -22,6 +22,12 @@
             socket.emit("message", "Hello Server!");
 
         });
+
+        // remeber that this is the Browser
+        // console.log is in the console of the browser
+        socket.on("message", (message) => {
+                console.log("Server says:", message);
+        });
     </script>
 
 </body>
