@@ -1,34 +1,57 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Socket.IO Learning</title>
+    <title>Socket.IO Chat</title>
 </head>
+
 <body>
 
-    <h1>Socket.IO Chat</h1>
+    <h1>Chat</h1>
 
-    <!-- include the Socket.IO client library -->
+    <ul id="messages"></ul>
+
+    <input
+        id="messageInput"
+        placeholder="Type a message..."
+    />
+
+    <button id="sendButton">
+        Send
+    </button>
+
     <script src="/socket.io/socket.io.js"></script>
 
     <script>
-        // create a new Socket.IO client instance and connect to the server
+
         const socket = io();
 
-        socket.on("connect", () => {
+        const input = document.getElementById("messageInput");
+        const button = document.getElementById("sendButton");
+        const messages = document.getElementById("messages");
 
-            console.log("Connected!");
+        button.addEventListener("click", () => {
 
-            // send an event called "message"
-            socket.emit("message", "Hello Server!");
+            const message = input.value;
+
+            socket.emit("message", message);
+
+            input.value = "";
 
         });
 
-        // remeber that this is the Browser
-        // console.log is in the console of the browser
         socket.on("message", (message) => {
-                console.log("Server says:", message);
+
+            const li = document.createElement("li");
+
+            li.textContent = message;
+
+            messages.appendChild(li);
+
         });
+
     </script>
 
 </body>
+
 </html>

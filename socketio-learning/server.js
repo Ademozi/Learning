@@ -27,6 +27,12 @@ io.on("connection", (socket) => {
     //});
 
     socket.on("message", (message) => {
+        console.log("Message received:", message);
+
+        io.emit("message", message);
+    });
+
+    socket.on("message", (message) => {
         // io.emit send message to everyone
         io.emit("message", message);
     });
