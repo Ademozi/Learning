@@ -34,9 +34,14 @@
 
         const usernameInput = document.getElementById("usernameInput");
         const joinButton = document.getElementById("joinButton");
+        const input = document.getElementById("messageInput");
+        const button = document.getElementById("sendButton");
+        const messages = document.getElementById("messages");
 
         let username = "";
 
+
+        // JOIN
         joinButton.addEventListener("click", () => {
 
             username = usernameInput.value;
@@ -45,10 +50,7 @@
 
         });
 
-        const input = document.getElementById("messageInput");
-        const button = document.getElementById("sendButton");
-        const messages = document.getElementById("messages");
-
+        // SEND MESSAGE
         button.addEventListener("click", () => {
 
             const message = input.value;
@@ -63,6 +65,7 @@
 
         });
 
+        // RECEIVE MESSAGE
         socket.on("message", (data) => {
 
             const li = document.createElement("li");
@@ -73,11 +76,24 @@
 
         });
 
+        // USER JOINED
         socket.on("userJoined", (username) => {
 
             const li = document.createElement("li");
 
             li.textContent = `${username} has joined the chat.`;
+
+            messages.appendChild(li);
+
+        });
+
+        // USER LEFT
+        socket.on("user left", (username) => {
+
+            const li = document.createElement("li");
+
+            li.textContent =
+                `${username} left the chat`;
 
             messages.appendChild(li);
 
