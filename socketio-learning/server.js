@@ -16,12 +16,19 @@ io.on("connection", (socket) => {
 
     console.log("A user connected!");
 
-    socket.emit("message", "Hello from the server!");
+    // Server ==> Browser
+    //socket.emit("message", "Hello from the server!");
 
+    // Browser ==> Server
     // Listen for an event called "message"
     // so everytime socket.emit("message") run, this function run
+    //socket.on("message", (message) => {
+    //    console.log("Message received:", message);
+    //});
+
     socket.on("message", (message) => {
-        console.log("Message received:", message);
+        // io.emit send message to everyone
+        io.emit("message", message);
     });
 
     socket.on("disconnect", () => {
