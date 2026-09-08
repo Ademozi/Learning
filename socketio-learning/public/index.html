@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Socket.IO Learning</title>
+</head>
+<body>
+
+    <h1>Socket.IO Chat</h1>
+
+    <!-- include the Socket.IO client library -->
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+        // create a new Socket.IO client instance and connect to the server
+        const socket = io();
+
+        socket.on("connect", () => {
+
+            console.log("Connected!");
+
+            // send an event called "message"
+            socket.emit("message", "Hello Server!");
+
+        });
+    </script>
+
+</body>
+</html>
