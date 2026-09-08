@@ -40,16 +40,17 @@ io.on("connection", (socket) => {
     });
 
     // -------------------------
-    socket.on("message", (message) => {
-        console.log("Message received:", message);
-
-        io.emit("message", message);
+    socket.on("message", (data) => {
+        console.log(data);
     });
 
-    socket.on("message", (message) => {
+    // -------------------------
+    //socket.on("message", (message) => {
+        //console.log("Message received:", message);
         // io.emit send message to everyone
-        io.emit("message", message);
-    });
+        //io.emit("message", message);
+    //});
+
 
     socket.on("disconnect", () => {
         console.log("A user disconnected!");
