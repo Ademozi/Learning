@@ -26,9 +26,9 @@ io.on("connection", (socket) => {
     //    console.log("Message received:", message);
     //});
 
-    // -------------------------
- 
 
+    // -------------------------
+    // User joins the chat
     socket.on("join", (username) => {
 
         socket.username = username;
@@ -40,8 +40,11 @@ io.on("connection", (socket) => {
     });
 
     // -------------------------
+    // User sends message
     socket.on("message", (data) => {
-        console.log(data);
+        
+        io.emit("message", data);
+
     });
 
     // -------------------------
@@ -52,8 +55,19 @@ io.on("connection", (socket) => {
     //});
 
 
+    // -------------------------
+    // User disconnects
     socket.on("disconnect", () => {
         console.log("A user disconnected!");
+
+        if (socket.username) {
+
+            socket.broadcast.emit(
+                "user left",
+                socket.username
+            );
+
+        }
     });
 
 });

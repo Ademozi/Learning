@@ -63,11 +63,11 @@
 
         });
 
-        socket.on("message", (message) => {
+        socket.on("message", (data) => {
 
             const li = document.createElement("li");
 
-            li.textContent = message;
+            li.textContent = `${data.username}: ${data.message}`;
 
             messages.appendChild(li);
 
