@@ -14,7 +14,7 @@ app.use(express.static("public"));
 // "Whenever a client establishes a Socket.IO connection, execute this function."
 io.on("connection", (socket) => {
 
-    console.log("A user connected!");
+    console.log("User connected: ", socket.id);
 
     // Server ==> Browser
     //socket.emit("message", "Hello from the server!");
@@ -26,6 +26,20 @@ io.on("connection", (socket) => {
     //    console.log("Message received:", message);
     //});
 
+    // -------------------------
+ 
+
+    socket.on("join", (username) => {
+
+        socket.username = username;
+
+        console.log(username, "joined the chat");
+
+        socket.broadcast.emit("userJoined", username);
+
+    });
+
+    // -------------------------
     socket.on("message", (message) => {
         console.log("Message received:", message);
 

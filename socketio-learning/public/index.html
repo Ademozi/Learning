@@ -11,6 +11,12 @@
 
     <ul id="messages"></ul>
 
+    <input id="usernameInput" placeholder="Your username">
+
+    <button id="joinButton">
+        Join
+    </button>
+
     <input
         id="messageInput"
         placeholder="Type a message..."
@@ -25,6 +31,19 @@
     <script>
 
         const socket = io();
+
+        const usernameInput = document.getElementById("usernameInput");
+        const joinButton = document.getElementById("joinButton");
+
+        let username = "";
+
+        joinButton.addEventListener("click", () => {
+
+            username = usernameInput.value;
+
+            socket.emit("join", username);
+
+        });
 
         const input = document.getElementById("messageInput");
         const button = document.getElementById("sendButton");
@@ -45,6 +64,16 @@
             const li = document.createElement("li");
 
             li.textContent = message;
+
+            messages.appendChild(li);
+
+        });
+
+        socket.on("userJoined", (username) => {
+
+            const li = document.createElement("li");
+
+            li.textContent = `${username} has joined the chat.`;
 
             messages.appendChild(li);
 
