@@ -5,4 +5,8 @@ export class AppService {
   getHello(): string {
     return 'Hello World!';
   }
+
+  sayWelcomeToTheUser(): string {
+    return 'Welcome to';
+  }
 }
